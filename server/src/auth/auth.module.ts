@@ -19,6 +19,6 @@ import { PrismaService } from 'src/prisma.service';
     AuthGuard,
     PrismaService,
   ],
-  exports: [AuthService, RolesGuard, AuthGuard],
+  exports: [AuthService, RolesGuard, AuthGuard, PasswordService, TokenService, CookieService],
 })
 export default class AuthModule {}

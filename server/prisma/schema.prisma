@@ -8,15 +8,46 @@ datasource db {
 }
 
 model User {
-  id       String @id @default(uuid())
-  username String @unique(map: "username_UNIQUE") @db.VarChar(30)
-  password String @db.VarChar(255)
-  roleId   String
-  role     Role   @relation(fields: [roleId], references: [id])
+  id        String   @id @default(uuid())
+  username  String   @unique(map: "username_UNIQUE") @db.VarChar(30)
+  password  String   @db.VarChar(255)
+  roleId    String
+  role      Role     @relation(fields: [roleId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model Role {
-  id    String @id @default(uuid())
-  name  String @unique(map: "name_UNIQUE") @db.VarChar(50)
-  users User[]
+  id        String   @id @default(uuid())
+  name      String   @unique(map: "role_name_UNIQUE") @db.VarChar(50)
+  users     User[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Author {
+  id    Int    @id @default(autoincrement())
+  name  String
+  books Book[]
+}
+
+model Book {
+  id        String   @id @default(uuid())
+  title     String   @unique(map: "title_UNIQUE") @db.VarChar(50)
+  units     Int      @default(0)
+  year      DateTime
+  authorId  Int
+  author    Author   @relation(fields: [authorId], references: [id])
+  genreId   String
+  genre     Genre    @relation(fields: [genreId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Genre {
+  id        String   @id @default(uuid())
+  name      String   @unique(map: "genre_name_UNIQUE") @db.VarChar(50)
+  books     Book[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }

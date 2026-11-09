@@ -1,5 +1,5 @@
-export default interface UserResponseDto {
-    id: string;
-    username: string;
-    roleName: string;
+export interface UserResponseDto {
+  id: string;
+  username: string;
+  roleName: string;
 }

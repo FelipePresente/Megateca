@@ -2,7 +2,7 @@ import PasswordService from "@/helpers/password.service";
 import TokenService from "@/helpers/token.service";
 import { PrismaService } from "@/prisma.service";
 import UserDto from "@/types/user/UserDto";
-import UserResponseDto from "@/types/user/UserResponseDto";
+import type { UserResponseDto } from "@/types/user/UserResponseDto";
 import { BadRequestException, ConflictException, Injectable, NotFoundException } from "@nestjs/common";
 import SignUpDto from "./dto/signupDto";
 import prismaErrorHandler from "@/helpers/prismaErrorHandler";
