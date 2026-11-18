@@ -20,7 +20,7 @@ O sistema resolve o problema de organizar o acervo de uma livraria, mantendo o c
 
 1. Clone o repositório:
 ```bash
-git clone <URL_DO_REPOSITORIO>
+git clone https://github.com/felipepresente/megateca.git
 cd Megateca
 ```
 
@@ -90,7 +90,7 @@ git init
 git add .
 git commit -m "Versao final da API com middlewares, README e collection do Postman"
 git branch -M main
-git remote add origin <LINK_DO_SEU_REPOSITORIO_NO_GITHUB>
+git remote add origin https://github.com/felipepresente/megateca.git
 git push -u origin main
 ```
 
