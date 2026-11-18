@@ -29,3 +29,9 @@ Thumbs.db
 
 # TypeScript build info
 **/tsconfig.tsbuildinfo
+
+# Prisma (SQLite dev db and generated client)
+prisma/dev.db
+prisma/dev.db-journal
+**/prisma/dev.db
+**/prisma/dev.db-journal

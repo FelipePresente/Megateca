@@ -1,0 +1,170 @@
+{
+  "info": {
+    "_postman_id": "megateca-books-collection",
+    "name": "Megateca - API Livraria (Books)",
+    "schema": "https://schema.postman.com/collection/evolution/2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Listar todos os livros",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/books",
+          "host": ["{{baseUrl}}"],
+          "path": ["books"]
+        },
+        "description": "GET /books - Lista todos os livros (inclui autor e gênero). Espera 200 OK."
+      },
+      "response": []
+    },
+    {
+      "name": "Buscar livro por ID",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/books/{{bookId}}",
+          "host": ["{{baseUrl}}"],
+          "path": ["books", "{{bookId}}"],
+          "query": []
+        },
+        "description": "GET /books/:id - Busca um livro por ID. Espera 200 OK."
+      },
+      "response": []
+    },
+    {
+      "name": "Erro - ID vazio na URL",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/books/",
+          "host": ["{{baseUrl}}"],
+          "path": ["books", ""]
+        },
+        "description": "GET /books/ - ID vazio deve ser barrado pelo ValidarIdMiddleware com 400 Bad Request."
+      },
+      "response": []
+    },
+    {
+      "name": "Cadastrar livro (válido)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"title\": \"Dom Casmurro\",\n  \"units\": 10,\n  \"year\": \"2000-01-01T00:00:00.000Z\",\n  \"authorId\": 1,\n  \"genreId\": \"00000000-0000-0000-0000-000000000001\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/books",
+          "host": ["{{baseUrl}}"],
+          "path": ["books"]
+        },
+        "description": "POST /books - Cadastro válido. Espera 201 Created."
+      },
+      "response": []
+    },
+    {
+      "name": "Erro - Título inválido (menos de 5 caracteres)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"title\": \"ABC\",\n  \"units\": 1,\n  \"year\": \"2000-01-01T00:00:00.000Z\",\n  \"authorId\": 1,\n  \"genreId\": \"00000000-0000-0000-0000-000000000001\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/books",
+          "host": ["{{baseUrl}}"],
+          "path": ["books"]
+        },
+        "description": "POST /books - Título com menos de 5 caracteres deve ser barrado com 400 Bad Request."
+      },
+      "response": []
+    },
+    {
+      "name": "Erro - Sem authorId",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"title\": \"O Cortiço\",\n  \"units\": 5,\n  \"year\": \"1890-01-01T00:00:00.000Z\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/books",
+          "host": ["{{baseUrl}}"],
+          "path": ["books"]
+        },
+        "description": "POST /books - Falta authorId deve ser barrado com 400 Bad Request."
+      },
+      "response": []
+    },
+    {
+      "name": "Atualizar livro",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"title\": \"Dom Casmurro - Edição Especial\",\n  \"units\": 12\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/books/{{bookId}}",
+          "host": ["{{baseUrl}}"],
+          "path": ["books", "{{bookId}}"]
+        },
+        "description": "PUT /books/:id - Atualiza um livro existente. Espera 200 OK."
+      },
+      "response": []
+    },
+    {
+      "name": "Remover livro",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/books/{{bookId}}",
+          "host": ["{{baseUrl}}"],
+          "path": ["books", "{{bookId}}"]
+        },
+        "description": "DELETE /books/:id - Remove um livro. Espera 200 OK."
+      },
+      "response": []
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8000",
+      "type": "string"
+    },
+    {
+      "key": "bookId",
+      "value": "",
+      "type": "string"
+    }
+  ]
+}
